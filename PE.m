@@ -66,11 +66,11 @@ function outdata = PE( indata, delay, order, windowSize )
      tempSum = tempSum - ordDistNorm( iPattern )*log( ordDistNorm( iPattern ) );
    end
  end
- outdata( windowSize + delay*order ) = tempSum;
+ outdata( windowSize) = tempSum;
 
  iTau = mod( windowSize, delay ) + 1;   % current shift 1:delay
  patternPosition = 1;                   % position of the current pattern in the window
- for t = windowSize + delay*order + 1:nPoints % loop over all points
+ for t = windowSize + 1:nPoints % loop over all points
      posL = 1;                          % the position of the next point
      for j = t-orderDelay:delay:t-delay
          if( indata( j ) >= indata( t ) ) 
@@ -100,4 +100,4 @@ function outdata = PE( indata, delay, order, windowSize )
        patternPosition = 1; 
      end
  end 
- outdata = outdata( windowSize + delay*order:end )/log( factorial( order + 1 ) );
+ outdata = outdata(windowSize)/log( factorial( order + 1 ) );
